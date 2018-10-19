@@ -11,6 +11,7 @@ void output();						//to display the output of the user code
 int main(){
 input_user();						//calling input function
 predict();						//calling the predict function
+output();						//calling the output function
 return 0;
 }
 
@@ -53,6 +54,8 @@ printf("%s",s);
 fclose(fp);
 }
 
-void output(){						//to output the user code
+void output(){						//output of the user code
+printf("\nOutput: \n");
 system("./userdata");
+printf("\n");
 }
