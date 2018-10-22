@@ -29,9 +29,9 @@ while(fgets(str,99,fp1)!=NULL)
 		c++;										//for next word
 		strcpy(word," ");								//initializing word as empty again
         }
-	for(i=0;i<=strlen(str)-1;i++)
-	{
+	//for(i=0;i<=strlen(str)-1;i++)
+	//{
 
-	}
+	//}
 }
 }
