@@ -1,0 +1,2 @@
+int fun(int);
+
