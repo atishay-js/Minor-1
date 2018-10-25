@@ -12,17 +12,13 @@ char backslash=(char)92;
 char n=(char)110;
 
 FILE *fp1,*fp2;
-fp1=fopen("userdata.txt","r");
+fp1=fopen("userdata.c","r");
 fp2=fopen("whitespace.txt","w");
 
 while(fgets(str,99,fp1)!=NULL)								//to extract userdata.c line by line
 {
 	for(i=0;i<strlen(str)-1;i++)
 	{
-		if(strcmp(&str[0])
-		{
-			break;
-		}
 		if(!isspace(str[i]) && !isspace(str[i+1]))	 			 //case when there are continous characters and not any space in between ab,#a,##,b#
                 {
                         fputc(str[i],fp2);
