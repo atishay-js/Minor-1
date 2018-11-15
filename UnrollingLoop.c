@@ -1,108 +1,104 @@
 #include<stdio.h>
+#include<string.h>
+
 void main()
 {
-unsigned int n;
-int i;
-char ch;
-printf("Enter N\n");
-scanf("%u",&n);
-printf("\n1. Loop Roll\n2. Loop Unroll 2\n3. Loop Unroll 3\n4. Loop Unroll 4\n5. Loop Unroll 5\n");
-printf("\nEnter your choice\n");
-scanf(" %c",&ch);
-switch(ch)
-{
-case '1':
-  i=loop1(n);
-  printf("\nLoop Roll: Count of  1's    :  %d" ,i);
-  break;
-case '2':
-  i=loop2(n);
-  printf("\nLoop Unroll 2:  Count of 1's  :  %d" ,i);
-  break;
-case '3':
-  i=loop3(n);
-  printf("\nLoop Unroll 3:  Count of 1's  :  %d" ,i);
-  break;
-case '4':
-  i=loop4(n);
-  printf("\nLoop Unroll 4:  Count of 1's  :  %d" ,i);
-  break;
-case '5':
-  i=loop5(n);
-  printf("\nLoop Unroll 5:  Count of 1's  :  %d" ,i);
-  break;
-default:
-  printf("\n Wrong Choice\n");
+char str[99],str1[99];
+char itr[10],semic[20];											//assuming iterator of loop to be maximum of 10 characters
+int itr_pos,i,j,open=0,close=0,semic_pos;
+FILE *fp1,*fp2,*fp3;
+fp1=fopen("userdata.c","r");
+fp2=fopen("loopunrolled.txt","w");
+fp3=fopen("contentloop.txt","w+");
 
-}
-}
-int loop1(unsigned int n)
+while(fgets(str,99,fp1)!=NULL)
 {
-    int  j=0,k=0;
-    while (n != 0)
-    {
- if (n & 1) j++;
- n >>= 1;
- k++;
-    }
-    printf("\n no of iterations  %d",k);
-    return j;
+	if(strstr(str,"for(")!=NULL)
+	{	puts("identified for");
+		itr_pos=strstr(str,"(")-str;
+		i=itr_pos+1;
+		j=0;
+		puts(str);
+		printf("%d\n",i);
+		while(str[i]!='=')
+		{	puts("identified iterator");
+			itr[j]=str[i];
+			j++;
+			i++;
+		}
+		semic_pos=strstr(str,";")-str;
+		i=semic_pos+1;
+		j=0;
+		while(str[i]!=';')
+		{
+			semic[j]=str[i];
+			j++;
+			i++;
+		}
+		printf("Iterator is %s\n",itr);
+                if(strstr(str,"{")!=NULL)
+		{	puts("checking opening curly brace in same line");
+			fputs(str,fp2);
+			fgets(str,99,fp1);
+			open++;
+		}
+		else
+		{	puts("checking opening curly brace in next same line");
+			fgets(str,99,fp1);
+			if(str[0]=='{')
+			{	puts("checking closing curly brace in same line");
+				open++;
+				fputs(str,fp2);
+				fgets(str,99,fp1);
+			}
+		}
+
+		b:
+		puts("inside for");
+                if(strstr(str,"{")!=NULL)                                                       //checking for "{"
+                {	puts("checking { in for");
+                        open++;
+                }
+                if(strstr(str,"}")!=NULL)                                                       //checking for "}"
+                {	puts("checking } in for");
+                        close++;
+                        if((open-close)==0)                                                   //if "{"-"}"=0 then it means main has ended
+                        {	puts("checking termination condition");
+                                goto a;                                                         //therefore goto a i.e. end of main and out of main
+                        }
+                }
+		puts("puting str in fp3");
+		puts(str);
+                fputs(str,fp3);
+                fgets(str,99,fp1);                                                              //if still in main 
+                goto b;                                                                         //execute the same commands again
+
+		a:
+		fseek(fp3,0,SEEK_SET);
+		while(fgets(str1,99,fp3)!=NULL)
+		{	puts("putting for contents into  file");
+			fputs(str1,fp2);
+		}
+		fputs(itr,fp2);
+		fputs("++;",fp2);
+		fprintf(fp2,"\n");
+		fseek(fp3,0,SEEK_SET);
+		while(fgets(str1,99,fp3)!=NULL) 
+                {
+                        fputs(str1,fp2);
+                }
+		fputs(str,fp2);
+
+        }
+	else
+	{
+		fputs(str,fp2);
+	}
 }
-int loop2(unsigned int n)
-{
-    int  j=0,k=0;
-    while (n != 0)
-    {
- if (n & 1) j++;
- if (n & 2) j++;
- n >>= 2;
- k++;
-    }
-    printf("\n no of iterations  %d",k);
-    return j;
-}
-int loop3(unsigned int n)
-{
-    int j=0,k=0;
-    while (n != 0)
-    {
- if (n & 1) j++;
- if (n & 2) j++;
- if (n & 4) j++;
- n >>= 3;
- k++;
-    }
-    printf("\n no of iterations  %d",k);
-    return j;
-}
-int loop4(unsigned int n)
-{
-    int k=0,j=0;
-    while (n != 0)
-    {
- if (n & 1) j++;
- if (n & 2) j++;
- if (n & 4) j++;
- if (n & 8) j++;
- n >>= 4;
- k++;
-    }
-    printf("\n no of iterations  %d",k);
-    return j;
-}
-int loop5(unsigned int n)
-{
-    int j=0,k=0;
-    while (n != 0)
-    {
- if (n & 1) j++;
- if (n & 2) j++;
- if (n & 4) j++;
- if (n & 8) j++;
- if (n & 16) j++;
- n >>= 5;
- k++;
-    }
-    printf("\n no of iterations  %d",k);
-    return j;
+
+
+
+fclose(fp1);
+fclose(fp2);
+fclose(fp3);
 }
