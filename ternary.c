@@ -138,30 +138,7 @@ fclose(fp4);
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 /*
-
-
-
-
-
-
-
-
-
-
 do{
 	condition=fputs(str,fp2);
 	}
