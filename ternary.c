@@ -3,40 +3,40 @@
 
 void main(){
 
-char str[99];
-char str_nextline[99];
-char str_nextline1[99];
+char str[99];									//string to input from userdata.c
+char str_nextline[99];								//string to take input from other files
+char str_nextline1[99];								//string to take input from other files and of next line
 int str_len;
-char str_nosemi[99];
-char str1[99];
-char str2[99];
-int open=0,close=0;
+char str_nosemi[99];								//string without semicolon to be inserted in ternary
+char str1[99];									//extra string
+char str2[99];									//extra string
+int open=0,close=0;								//for counting the opening and closing brackets
 int pos_condition,i,j,coma_pos,pos_neg;
-char condition[10]=" ";
+char condition[10]=" ";								//for condition of if
 
 FILE *fp1,*fp2,*fp3,*fp4,*fp5;
-fp1=fopen("userdata.c","r");
-fp2=fopen("ternary.txt","w+");
-fp3=fopen("tern_if.txt","w+");
-fp4=fopen("if_complete.txt","w+");
-fp5=fopen("tern_else.txt","w+");
+fp1=fopen("userdata.c","r");							//main file
+fp2=fopen("ternary.txt","w+");							//updated code
+fp3=fopen("tern_if.txt","w+");							//altered contents of if according to needs that are to be put in ternary
+fp4=fopen("if_complete.txt","w+");						//complete if for the case else not found
+fp5=fopen("tern_else.txt","w+");						//altered contents of else according to needs that are to be put in ternary 
 
-while(fgets(str,99,fp1)!=NULL)
+while(fgets(str,99,fp1)!=NULL)							//input
 {
-	if(strstr(str,"if(")!=NULL)
+	if(strstr(str,"if(")!=NULL)						//checking for if in string
 	{
-		pos_condition=strstr(str,"(")-str;
+		pos_condition=strstr(str,"(")-str;				//looking for ( to extract condition of if
 		i=pos_condition+1;
 		j=0;
-		while(str[i]!=')')
+		while(str[i]!=')')						//extracting the condition
 		{
 			condition[j]=str[i];
 			i++;
 			j++;
 		}
-		do
+		do								//taking cases into consideration and accordingly putting data into files
 		{
-			fputs(str,fp4);
+			fputs(str,fp4);						//putting complete if in if_complete for the if else not found
 			if(strstr(str,";")!=NULL)
                 	{
 		        	str_len=strlen(str);
