@@ -1,0 +1,22 @@
+Step 1- Start
+Step 2- Declare variable str, space=(char)32, nextline=(char)10, i, j and c=0
+Step 3- Open file userdata.txt in fp1 and optimized.txt in fp2
+Step 4- Input the user code line by line from fp1, while str!= NULL then goto 5 else goto 21
+Step 5- Loop over for i=0 till i<=length of str-1 goto 6 else goto 20
+Step 6- If str[i] and str[i+1] are not spaces then goto 7 else goto 8
+Step 7- Write in fp2 str[i] and goto 5
+Step 8- If str[i] is alphanumeric and str[i+1] is space then goto 9 else goto 14
+Step 9- Write in fp2 str[i], loop over for j=i+2 till length of str-1 goto 10 else goto 5
+Step 10- If str[j] is alphanumeric then goto 11 else goto 12
+Step 11- Write in fp2 space, str[j] then make i=j and goto 5
+Step 12- If str[j] is not space and str[j] is not alphanumeric then goto 13 else goto 5
+Step 13- Write in fp2 str[j], make i=j then goto 5
+Step 14- If str[i] is not alphanumeric and str[i] is not space and str[i+1] is space then goto 15
+Step 15- Write in fp2 str[i], loop over for j=i+1 till length of j is str-1 goto 16 else goto 5
+Step 16: If str[j] is alphanumeric the goto 17 else goto 18
+Step 17: Write in fp2 str[j], make i=j and goto 5
+Step 18- If str[j] is not space and str[j] is not alphanumeric then goto 19 else goto 5
+Step 19- Write in fp2 str[j], make i=j then goto 5
+Step 20- Write in fp2 nextline then goto 4
+Step 21- Close fp1, fp2
+Step 22- End
