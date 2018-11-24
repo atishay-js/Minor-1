@@ -21,10 +21,6 @@ while(fgets(str,99,fp1)!=NULL)								//to extract userdata.c line by line
 		goto a;
 	for(i=0;i<strlen(str)-1;i++)
 	{
-		//if(strstr(str,nextline))
-		//{
-		//	break;
-		//}
 		if(!isspace(str[i]) && !isspace(str[i+1]))	 			 //case when there are continous characters and not any space in between ab,#a,##,b#
                 {
                         fputc(str[i],fp2);
