@@ -34,21 +34,40 @@ while(fgets(str,99,fp1)!=NULL)							//input
 			i++;
 			j++;
 		}
+		if(strstr(str,"{"))						//checking for { in same line of if
+		{
+			fputs(str,fp4);
+			open++;
+			fgets(str,99,fp1);
+		}
+		else								//checking for { in next line of if
+		{
+			fputs(str,fp4);
+			fgets(str,99,fp1);
+			if(str[0]=='{')
+			{
+				fputs(str,fp4);
+				open++;
+				fgets(str,99,fp1);
+			}
+			else
+				goto a;
+		}
 		do								//taking cases into consideration and accordingly putting data into files
 		{
-			fputs(str,fp4);						//putting complete if in if_complete for the if else not found
-			if(strstr(str,";")!=NULL)
+			fputs(str,fp4);						//putting complete if in if_complete for the case if "else" is not found after if
+			if(strstr(str,";")!=NULL)				//content of if 
                 	{
 		        	str_len=strlen(str);
-				memset(str_nosemi,0,str_len);
+				memset(str_nosemi,0,str_len);			//making the string buffer empty
 				j=0;
-		                for(i=0;i<str_len-2;i++)
+		                for(i=0;i<str_len-2;i++)			//removing ; from the content of if
 		                {
 		                	str_nosemi[j]=str[i];
 		                        j++;
 		                }
 			}
-			if(strstr(str,"{")!=NULL)                                                       	//checking for "{" in the same line
+			if(strstr(str,"{")!=NULL)                                                       	//checking for "{"  inside if
                 	{
                         	if(open==0)
 					open++;
@@ -66,7 +85,7 @@ while(fgets(str,99,fp1)!=NULL)							//input
                         	{
 					if(strstr(str,"else")!=NULL)
                 			        goto b;								//else found in same line as }else
-                                	break;                                                         		//therefore goto a i.e. end of for and out of for
+                                	break;                                                         		//therefore goto b i.e. end of for and out of for
                         	}
 				fputs(str_nosemi,fp3);
 				fputs("\n",fp3);
@@ -77,12 +96,12 @@ while(fgets(str,99,fp1)!=NULL)							//input
 				fputs("\n",fp3);
 			}
 			fgets(str,99,fp1);
-		}while((open-close)!=0);
+		}while((open-close)!=0);									//terminating condition
 
 		fgets(str,99,fp1);
-		if(strstr(str,"else")!=NULL)
+		if(strstr(str,"else")!=NULL)									//checking for else after if
 		{
-			goto b;
+			goto b;											// if found goto b
 		}
 		else
 		{
@@ -91,27 +110,44 @@ while(fgets(str,99,fp1)!=NULL)							//input
 		b:
 		open=0;
 		close=0;
-		fputs("~\n",fp3);
+		fputs("~\n",fp3);										//putting ~ as an terminator
 		fseek(fp3,0,SEEK_SET);
-                fgets(str_nextline,99,fp3);
+                fgets(str_nextline,99,fp3);									//taking the next line input
 		j=0;
-                while(strstr(str_nextline1,"~")==NULL)
+                while(strstr(str_nextline1,"~")==NULL)								//extract if untill ~ is not found
                 {
                         fgets(str_nextline1,99,fp3);
 			if(strstr(str_nextline1,"~")==NULL)
                         {
-                                j=j+strlen(str_nextline);
+                                j=j+strlen(str_nextline);							//finding the strlen of string and adding it into j
                                	memset(str_nextline,0,99);
-                                fseek(fp3,j-1,SEEK_SET);
-                                fputs(",",fp3);
-                                fseek(fp3,j+strlen(str_nextline1),SEEK_SET);
+                                fseek(fp3,j-1,SEEK_SET);							//seeking pointer to j-1 position
+                                fputs(",",fp3);									//putting coma in between
+                                fseek(fp3,j+strlen(str_nextline1),SEEK_SET);					//seeking pointer to end of string to extract next string
                                 strcpy(str_nextline,str_nextline1);
 			}
                         else
                                 break;
                 }
 		fseek(fp3,0,SEEK_END);
-		do
+		if(strstr(str,"{"))										//checking for { in same line as if
+                {
+                        open++;
+                        fgets(str,99,fp1);
+                }
+                else												//checking for { in next line
+                {
+                        fgets(str,99,fp1);
+                        if(str[0]=='{')
+                        {
+                                open++;
+                                fgets(str,99,fp1);
+                        }
+                        else
+                                goto a;
+                }
+
+		do												//conditions same as condition of if
                 {
 			if(strstr(str,";")!=NULL)
                 	{
@@ -161,7 +197,7 @@ while(fgets(str,99,fp1)!=NULL)							//input
 		memset(str_nextline1,0,99);
                 fgets(str_nextline,99,fp5);
                 j=0;
-                while(strstr(str_nextline1,"~")==NULL)
+                while(strstr(str_nextline1,"~")==NULL)								//putting , in between of statements in order to put in ternary
                 {
                         fgets(str_nextline1,99,fp5);
                         if(strstr(str_nextline1,"~")==NULL)
@@ -178,34 +214,35 @@ while(fgets(str,99,fp1)!=NULL)							//input
                 }
 		fseek(fp5,0,SEEK_END);
 
-		fputs(condition,fp2);
-		fputs("?(",fp2);
+		fputs(condition,fp2);										//putting condition xyz ie (xyz)?():()
+		fputs("?(",fp2);										//putting ?(
 		fseek(fp3,0,SEEK_SET);
-		while(fgets(str2,99,fp3)!=NULL)
+		while(fgets(str2,99,fp3)!=NULL)									//putting contents of if ie abc
 		{
 			if(strstr(str2,"~")!=NULL)
 				break;
 			fputs(str2,fp2);
 		}
-		fputs("):\n(",fp2);
+		fputs("):\n(",fp2);										//(xyz)?(abc):(pqr) putting ):
 		fseek(fp5,0,SEEK_SET);
-		while(fgets(str2,99,fp5)!=NULL)
+		while(fgets(str2,99,fp5)!=NULL)									//putting pqr
 		{
 			if(strstr(str2,"~")!=NULL)
 				break;
 			fputs(str2,fp2);
 		}
-		fputs(");\n",fp2);
+		fputs(");\n",fp2);										//putting );
 		c:
-		while(fgets(str1,99,fp4)!=NULL)
+		while(fgets(str1,99,fp4)!=NULL)									//if else is not found
 		{
 			fputs(str1,fp2);
 		}
 	}
-	else
+	else													//in case there is no if in the str
 	{
 		fputs(str,fp2);
 	}
+	a:;
 }
 
 fclose(fp1);
