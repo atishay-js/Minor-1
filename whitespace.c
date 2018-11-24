@@ -13,12 +13,18 @@ char n=(char)110;
 
 FILE *fp1,*fp2;
 fp1=fopen("userdata.c","r");
-fp2=fopen("whitespace.txt","w");
+fp2=fopen("optimized.txt","w");
 
 while(fgets(str,99,fp1)!=NULL)								//to extract userdata.c line by line
 {
+	if(str[0]=='\n')
+		goto a;
 	for(i=0;i<strlen(str)-1;i++)
 	{
+		//if(strstr(str,nextline))
+		//{
+		//	break;
+		//}
 		if(!isspace(str[i]) && !isspace(str[i+1]))	 			 //case when there are continous characters and not any space in between ab,#a,##,b#
                 {
                         fputc(str[i],fp2);
@@ -64,6 +70,7 @@ while(fgets(str,99,fp1)!=NULL)								//to extract userdata.c line by line
 		}
 	}
 	fputc(nextline,fp2);
+	a:  ;
 }
 fclose(fp1);
 fclose(fp2);
