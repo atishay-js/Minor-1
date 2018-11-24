@@ -1,0 +1,66 @@
+Step 1- Start
+Step 2- Declare variable str, str_nextline, str_nextline1, str_len, str_nosemi, str1, str2, open=0, close=0, pos_condition, i, j, coma_pos, pos_neg 
+Step 3-Open file userdata.c in fp1 , ternary.txt in fp2,tern_if.txt in fp3,if_complete.txt in fp4,tern_else.txt in fp5 
+Step 4-Input the user code line by line from fp1, while str!= NULL then goto 5 else goto 34
+Step 5-Check the ‘if’  using strstr(replace string with another) if str!=NULL goto 6 else goto 64
+Step 6-Extract the position of ‘(‘ using strstr and evaluate to pos_condition then goto 7
+Step 7-Calculate i is equal to pos_condition+1 and j=0 then goto 8
+Step 8-while str!= ‘)’ then goto 9 else goto 10
+Step 9-condition[j]=str[i] ,increment i and j goto 8
+Step 10- do  write into fp4 str goto 11
+Step 11- if  str in ‘;’ is not NULL using strstr goto 12 else goto 16
+Step 12-find length of str and assign it to str_len goto 13
+Step 13- assign str_nosemi from 0 to str_len in memset method and set j=0 then goto 14
+Step 14- Loop over for i=0 till i<=str_len-2 goto 15
+Step 15- str_nosemi[j]=str[i] and increment j goto 14
+Step 16- if  str in ‘{’ is not NULL using strstr goto 17 else goto 20
+Step 17-if open=0 goto 18 else goto 19
+Step 18-increment open goto 17
+Step 19- increment open and write fp3 str_nosemi goto 18
+Step 20- if  str in ‘}’ is not NULL using strstr goto 21 else goto 25
+Step 21-increment close goto 22
+Step 22-if open-close=0 goto 23 else goto 24
+Step 23-if str in ‘else’ is not NULL using strstr then goto b and use break then goto 22
+Step 24- write fp3 str_nosemi else goto 22
+Step 25- else write fp3 str_nosemi then goto 26
+Step 26-read the str from fp1 goto 10 and while open-close is not equal to 0 then goto 5
+Step 27- read the str from fp1 goto 28
+Step 28- if str in ‘else’ is not NULL using strstr then goto b then goto 30 else goto 29
+Step 29-goto c tehn goto 62 else goto 28
+Step 30-Label b, open=0,close=0 , seek into file fp3 from 0 to SEEK_SET and read the str_nextline from fp3,j=0 then goto 31
+Step 31-while str_nextline1 in ‘~’ is equal to NULL using strstr goto 32 else goto 36
+Step 32- read the str_nextline1 from fp3 goto 33
+Step 33-if str_nextline1 in ‘~’ is equal to NULL using strstr goto 34 else goto 35
+Step 34-assign j+strlen(str_nextline) into j,str_nextline goes from 0 to 99 into memset method, seek into file fp3 from j-1 to SEEK_SET, copy the str_nextline1 into str_nextline then goto 33
+Step 35-use break statement else goto 33
+Step 36- seek into file fp3 from 0 to SEEK_END goto 37
+Step 37-do if str in ‘;’ is not NULL using strstr goto 38 else goto 41
+Step 38-find length of str and assign it to str_len and  assign str_nosemi from 0 to str_len in memset method, j=0 goto 39
+Step 39- Loop over for i=0 till i<=str_len-2 goto 40
+Step 40-str_nosemi[j]=str[i] and increment j goto 39
+Step 41- if str in ‘{’ is not NULL using strstr goto 42 else goto 44
+Step 42-if open=0 and increment open goto 43
+Step 43-else increment open and write fp5 str_nosemi goto 42
+Step 44- if str in ‘}’ is not NULL using strstr goto 45 else goto 47
+Step 45-increment c and if open-close=0 and use break statement else goto 46
+Step 46-write fp5 str_nosemi goto 45
+Step 47- else write fp5 str_nosemi goto 48
+Step 48- read the str from fp1 goto 37 and while open-close is not equal to 0 then goto 5
+Step 49- put f5, seek into file fp5 from 0 to SEEK_SET and read the str_nextline from fp5, assign str_nextline1 from 0 to 99 in memset method,j=0 then goto 50
+Step 50- while str_nextline1 in ‘~’ is equal to NULL using strstr goto 51 else goto 55
+Step 51- read the str_nextline1 from fp5 goto 52
+Step 52- if str_nextline1 in ‘~’ is equal to NULL using strstr goto 53 else goto 54
+Step 53- assign j+strlen(str_nextline) into j,str_nextline goes from 0 to 99 into memset method, seek into file fp5 from j-1 to SEEK_SET, seek into file fp5 from j+strlen(str_nextline1)  to SEEK_SET, copy the str_nextline1 into str_nextline then goto 54
+Step 54-use break statement else goto 53
+Step 55- seek into file fp5 from 0 to SEEK_END goto 56
+Step 56-write fp2 condition and seek into file fp3 from 0 to SEEK_SET goto 57
+Step 57-Read user code  from fp3, while str2!= NULL goto 58 else goto 59
+Step 58- if str2  in ‘~’ is not equal to NULL using strstr and use break statement and write fp2 str2 goto 57
+Step 59- seek into file fp5 from 0 to SEEK_SET goto 60
+Step 60- Read user code  from fp5, while str2!= NULL goto 61 else goto 62
+Step 61- if str2  in ‘~’ is not equal to NULL using strstr and use break statement and write fp2 str2 goto 60
+Step 62-Label c, Read user code  from fp4, while str1!= NULL goto 63 
+Step 63-write fp2 str1 goto 62
+Step 64-else write fp2 str then goto 5
+Step 65- Close fp1,fp1,fp3,fp4
+Step 66-End
