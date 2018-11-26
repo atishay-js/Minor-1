@@ -8,7 +8,7 @@
 jmp_buf *bufers;                                               //array is declared of type jmp_buf
 size_t bufer_count = 0;                                        //variable count is initialized of type size_t 
 
-exception_type last_exception;                                 //exception_type is a typeof datatype which contain a integer code and a char msg, last_exception is its variable 
+exception_type last_exception;                                 //exception_type is a typedef datatype which contain a integer code and a char msg, last_exception is its variable 
 
 
 void initialize_exception() {
