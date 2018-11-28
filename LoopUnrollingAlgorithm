@@ -1,0 +1,36 @@
+Step 1- Start
+Step 2- Declare variable str ,str1 ,itr , semic, sum_dec, cround_for_pos, c=0,itr_pos,i,j,open=0, close=0, semic_pos
+Step 3-Open file userdata.c in fp1 , loopunrolled.txt in fp2 , contentloop.txt in fp3
+Step 4-Input the user code line by line from fp1, while str!= NULL then goto 5 else goto 34
+Step 5-Check the for loop using strstr(replace string with another) if str!=NULL goto 6 else goto 33
+Step 6-Extract the position of ‘(‘ using strstr and evaluate to itr_pos then goto 7
+Step 7-Calculate i is equal to itr_pos+1 and j=0 then goto 8
+Step 8-while str!= ‘=’ then goto 9 else goto 10
+Step 9-Inrement c, itr[j]=str[i] ,increment j and i goto 8
+Step 10-Extract the position of ‘;‘ using strstr and evaluate to semic_pos then goto 11
+Step 11-Calculate i is equal to semic_pos+1 and j=0 then goto 12
+Step 12-while str!= ‘;’ then goto 13 else goto 14
+Step 13- semic[j]=str[i] ,increment j and i goto 12
+Step 14-Extract the position of ‘)‘ using strstr and evaluate to cround_for_pos then goto 15
+Step 15- Calculate i is equal to cround_for_pos-1 ,sum_dec[0]=str[i],sum_dec[1]=str[i-1] then goto 16
+Step 16- if str in ‘{’ != NULL using strstr then goto 17 else goto 18
+Step 17- Write in fp2 str , read the input code from fp1 and increment open then goto 16
+Step 18-else read the input code from fp1 , if str[0]= ‘{‘ then goto 19 else goto 20
+Step 19- Increment open,write in fp2 str , read the input code from fp1 then goto 18
+Step 20- Label b, goto 21
+Step 21- Check the “{“ using strstr if str!=NULL then increment open else goto 22
+Step 22-Check the “}“ using strstr if str!=NULL else goto 23 then increment close 
+Step 23-if openc - closec=0 then end and out of main then goto 25 else goto 24
+Step 24- write in fp3 str then goto 20 and read the input code from fp1 then goto b
+Step 25-Label a,goto 26
+Step 26-method fseek seek into SEEK_SET of file f3 goto 27
+Step 27-Read the input code from fp3 while str1!=NULL then goto 28 else goto 29
+Step 28-Write in fp2 str1 then goto 27
+Step 29- Write in fp2 itr and sum_dec ,print fp2 and method fseek seek into SEEK_SET of file f3 then goto 30
+Step 30-Read the input code from fp3 while str1!=NULL then goto 30 else goto 32
+Step 31-Write in fp2 str1 then goto 30
+Step 32- Write in fp2 str else goto 33
+Step 33- else write in fp2 str else goto 5
+Step 34-Close fp1,fp1,fp3
+Step 35-End
+
