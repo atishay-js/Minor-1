@@ -1,0 +1,18 @@
+Step 1- Start
+Step 2- Declare variable str, opener=(char)40,i,pos,c=0,openc =0,closec=0,word(store struct  type),array userdefined stores maximum of 5 different struct type.
+Step 3-Open file userdata.c in fp1 and inline.txt in fp2
+Step 4-Input the user code line by line from fp1, while str!= NULL then goto 5 else goto 17
+Step 5-Check the main function using strstr(replace string with another) if str!=NULL goto 6 else goto 12
+Step 6-Check the “{“ using strstr if str!=NULL then increment openc else goto 7
+Step 7-Check the “}“ using strstr if str!=NULL then else goto 8 increment closec 
+Step 8-if openc - closec=0 then end and out of main else goto 9 or still in main
+Step 9-write in fp2 str then goto 10 and read the input code from fp1 then goto b
+Step 10- add semicolon after label ‘a’ can circumvent the problem you are running in to  that count as a statement
+Step 11-For termination “{“ , write in fp2 str then goto 5 and read the input code from fp1
+Step 12- if str in space is not NULL and str in openround is not NULL and str in closeround is not NULL using strstr else goto 16
+Step 13-Loop over for i=0 till i<=length of str-1 goto 14 else goto 16
+Step 14-if str[i] and str[i+1] is alphanumeric is equal to openr then goto 15 else goto 16
+Step 15- Write in fp2 inline then goto 13
+Step 16- Write in fp2 str  then goto 12
+Step 17-Close fp1,fp1
+Step 18-End

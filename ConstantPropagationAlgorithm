@@ -1,0 +1,33 @@
+Step 1- Start
+Step 2- Declare variable str ,str1 , var_name, var_value, var_len, position, terminator=0, pos_seek, i=0,j=0
+Step 3-Open file userdata.c in fp1 , constant.c in fp2 
+Step 4-Input the user code line by line from fp1, while str!= NULL then goto 5 else goto 34
+Step 5-if  str in int is not NULL or str in float is not NULL or str in char is not NULL or str in double is not NULL and str in ‘=’ is not NULL and str in ‘;’ is not NULL using strstr  goto 6 else goto 32
+Step 6- assign var_name from 0 to 10 in memset method and set terminator = 1 then goto 7
+Step 7- if  str in int is not NULL or str in float is not NULL or str in char is not NULL or str in double is not NULL and str in ‘ ’ is not NULL using strstr goto 8 else goto 13
+Step 8- Extract the position of ‘ ‘ using strstr and evaluate to position then goto 9
+Step 9- Calculate i is equal to position+1 and j=0 then goto 10
+Step 10-while str!= ‘=’ then goto 11 else goto 12
+Step 11-Inrement c, var_name[j]=str[i] ,increment i and j goto 10
+Step 12- put var_name and calculate length of var_name, assign it to var_len then goto 7 
+Step 13-Extract the position of ‘=‘ using strstr and evaluate to position then goto 14
+Step 14-Calculate i is equal to positon+1 and j=0 then goto 15
+Step 15-while str!= ‘;’ then goto 16 else goto 17
+Step 16- var_value[j]=str[i] ,increment i and j goto 15
+Step 17- put var_value and print var_len then goto 18
+Step 18-find the position of file pointer in file f1 and assign it to pos_seek goto 5 else goto 20
+Step 20- Input the user code  from fp1, while str!= NULL then goto 21 else goto 34
+Step 21-put str1 goto 22
+Step 22- if  str1 in var_name is not NULL and str in ‘=’ is not NULL or str in ‘++’ is not NULL or str in ‘—‘ is not NULL using strstr goto 23 else goto28
+Step 23-assign value of strstr(str1,var_name)-str1 into position then print it goto 24
+Step 24-assign value of position+var_len into position goto 25
+Step 25-put str1 goto 22 else goto 26
+Step 26-if str1[position] = ‘=’ or str1[position]=’+’ and  str1[position+1]=’+’ or str1[position]=’-’ and  str1[position+1]=’-’ goto 27 else goto 28
+Step 27-terminaor = -1 and use break statement goto 26
+Step 28-seek into fp1 for pos_seek and SEEK_SET goto 29
+Step 29-if terminator=0 or terminator=1 goto 30 else goto 31
+Step 30-write in fp2 constant and fp2 str goto 29
+Step 31-else goto your label a then goto 32 else goto 29
+Step 32-else go to your label a and write in fp2 str then goto 33 else goto 5
+Step 33-Close fp1,fp1
+Step 34-End
